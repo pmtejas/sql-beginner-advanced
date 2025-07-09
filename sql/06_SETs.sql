@@ -17,32 +17,76 @@
 /* ==============================================================================
    RULES OF SET OPERATIONS
 ===============================================================================*/
-
+use salesdb;
 /* RULE: Data Types
    The data types of columns in each query should match.
 */
-
+SELECT 
+CustomerID,
+FirstName,
+LastName
+FROM Sales.Customers 
+UNION
+SELECT 
+FirstName,
+EmployeeID,
+LastName
+FROM Sales.Employees ;
 
 /* RULE: Data Types (Example)
    The data types of columns in each query should match.
 */
-
+SELECT 
+CustomerID,
+FirstName
+FROM Sales.Customers 
+UNION
+SELECT 
+FirstName,
+EmployeeID
+FROM Sales.Employees ;
 
 /* RULE: Column Order
    The order of the columns in each query must be the same.
 */
-
-
+SELECT 
+CustomerID,
+FirstName,
+LastName
+FROM Sales.Customers 
+UNION
+SELECT 
+EmployeeID,
+FirstName
+FROM Sales.Employees ;
 /* RULE: Column Aliases
    The column names in the result set are determined by the column names
    specified in the first SELECT statement.
 */
-
+SELECT 
+CustomerID as ID,
+FirstName,
+LastName
+FROM Sales.Customers 
+UNION
+SELECT 
+EmployeeID,
+FirstName,
+LastName
+FROM Sales.Employees ;
 
 /* RULE: Correct Columns
    Ensure that the correct columns are used to maintain data consistency.
 */
-
+SELECT 
+FirstName,
+LastName
+FROM Sales.Customers 
+UNION
+SELECT 
+LastName,
+FirstName
+FROM Sales.Employees ;
 
 /* ==============================================================================
    SETS: UNION, UNION ALL, EXCEPT, INTERSECT
@@ -51,23 +95,95 @@
 /* TASK 1: 
    Combine the data from Employees and Customers into one table using UNION 
 */
-
+SELECT 
+CustomerID as Id,
+FirstName,
+LastName
+FROM Sales.Customers 
+UNION 
+SELECT 
+EmployeeID,
+FirstName,
+LastName
+FROM Sales.Employees ;
 
 /* TASK 2: 
    Combine the data from Employees and Customers into one table, including duplicates, using UNION ALL 
 */
-
+SELECT 
+CustomerID as Id,
+FirstName,
+LastName
+FROM Sales.Customers 
+UNION ALL
+SELECT 
+EmployeeID,
+FirstName,
+LastName
+FROM Sales.Employees ;
 
 /* TASK 3: 
    Find employees who are NOT customers using EXCEPT 
 */
-
+SELECT 
+EmployeeID as id,
+FirstName,
+LastName
+FROM Sales.Employees 
+EXCEPT
+SELECT 
+CustomerID,
+FirstName,
+LastName
+FROM Sales.Customers ;
 
 /* TASK 4: 
    Find employees who are also customers using INTERSECT 
 */
-
+SELECT 
+EmployeeID as id,
+FirstName,
+LastName
+FROM Sales.Employees 
+INTERSECT
+SELECT 
+CustomerID,
+FirstName,
+LastName
+FROM Sales.Customers ;
 
 /* TASK 5: 
    Combine order data from Orders and OrdersArchive into one report without duplicates 
 */
+SELECT 
+'orders' as sourceTable,
+OrderID,
+ProductID,
+CustomerID,
+SalesPersonID,
+OrderDate,
+ShipDate,
+OrderStatus,
+ShipAddress,
+BillAddress,
+Quantity,
+Sales,
+CreationTime
+FROM Sales.Orders 
+UNION
+SELECT 
+'ordersArchive',
+OrderID,
+ProductID,
+CustomerID,
+SalesPersonID,
+OrderDate,
+ShipDate,
+OrderStatus,
+ShipAddress,
+BillAddress,
+Quantity,
+Sales,
+CreationTime
+FROM Sales.OrdersArchive 
+ORDER BY OrderID
