@@ -39,11 +39,27 @@
 */
 
     -- DATETRUNC Examples
+         --YEAR
+         --Day
+         --minute
 
     -- DATENAME Examples
+         --month
+         --week
+         --day
+         --year
 
     -- DATEPART Examples
+       --year
+       --month
+       --day
+       --hour
+       --quarter
+       --week
 
+       --year
+       --month
+       --day
 
 /* ==============================================================================
    DATETRUNC() DATA AGGREGATION
