@@ -15,18 +15,18 @@
 /* ============================================================================== 
    ROUND() - Rounding Numbers
 =============================================================================== */
-use mydatabase
+use mydatabase;
 -- Demonstrate rounding a number to different decimal places
-SELECT 3.516 as originalNumber ,
-ROUND(3.516,2) as Round_2,
-ROUND(3.516,1) as Round_1,
-Round(3.516,0) as Round_0
+SELECT 3.516 as orginalNumber,
+ROUND(3.516, 2) as round_2,
+ROUND(3.516, 1) as round_1,
+ROUND(3.516, 0) as round_0
 
 /* ============================================================================== 
    ABS() - Absolute Value
 =============================================================================== */
 
 -- Demonstrate absolute value function
-SELECT -10 as originalNumber ,
-ABS(-10) as absoluteNegativeNumer,
-ABS(10) as absolutepositivenumber
+SELECT -10 as orginalNumber,
+ABS(-10) as absoluteNegative,
+ABS(10) as absolutePositive

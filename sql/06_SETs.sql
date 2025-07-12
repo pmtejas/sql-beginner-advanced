@@ -17,7 +17,7 @@
 /* ==============================================================================
    RULES OF SET OPERATIONS
 ===============================================================================*/
-use salesdb;
+use SalesDB
 /* RULE: Data Types
    The data types of columns in each query should match.
 */
@@ -29,8 +29,8 @@ FROM Sales.Customers
 UNION
 SELECT 
 FirstName,
-EmployeeID,
-LastName
+LastName,
+EmployeeID
 FROM Sales.Employees ;
 
 /* RULE: Data Types (Example)
@@ -38,11 +38,13 @@ FROM Sales.Employees ;
 */
 SELECT 
 CustomerID,
-FirstName
+FirstName,
+LastName
 FROM Sales.Customers 
 UNION
 SELECT 
 FirstName,
+LastName,
 EmployeeID
 FROM Sales.Employees ;
 
@@ -56,16 +58,17 @@ LastName
 FROM Sales.Customers 
 UNION
 SELECT 
-EmployeeID,
-FirstName
+LastName,
+EmployeeID
 FROM Sales.Employees ;
+
 /* RULE: Column Aliases
    The column names in the result set are determined by the column names
    specified in the first SELECT statement.
 */
 SELECT 
-CustomerID as ID,
-FirstName,
+CustomerID as Id,
+FirstName ,
 LastName
 FROM Sales.Customers 
 UNION
@@ -79,11 +82,13 @@ FROM Sales.Employees ;
    Ensure that the correct columns are used to maintain data consistency.
 */
 SELECT 
-FirstName,
+CustomerID as Id,
+FirstName ,
 LastName
 FROM Sales.Customers 
 UNION
 SELECT 
+EmployeeID,
 LastName,
 FirstName
 FROM Sales.Employees ;
@@ -97,10 +102,10 @@ FROM Sales.Employees ;
 */
 SELECT 
 CustomerID as Id,
-FirstName,
+FirstName ,
 LastName
 FROM Sales.Customers 
-UNION 
+UNION
 SELECT 
 EmployeeID,
 FirstName,
@@ -112,7 +117,7 @@ FROM Sales.Employees ;
 */
 SELECT 
 CustomerID as Id,
-FirstName,
+FirstName ,
 LastName
 FROM Sales.Customers 
 UNION ALL
@@ -133,9 +138,9 @@ FROM Sales.Employees
 EXCEPT
 SELECT 
 CustomerID,
-FirstName,
+FirstName ,
 LastName
-FROM Sales.Customers ;
+FROM Sales.Customers 
 
 /* TASK 4: 
    Find employees who are also customers using INTERSECT 
@@ -148,15 +153,15 @@ FROM Sales.Employees
 INTERSECT
 SELECT 
 CustomerID,
-FirstName,
+FirstName ,
 LastName
-FROM Sales.Customers ;
+FROM Sales.Customers 
 
 /* TASK 5: 
    Combine order data from Orders and OrdersArchive into one report without duplicates 
 */
 SELECT 
-'orders' as sourceTable,
+'order' AS sourcetable,
 OrderID,
 ProductID,
 CustomerID,
@@ -172,7 +177,7 @@ CreationTime
 FROM Sales.Orders 
 UNION
 SELECT 
-'ordersArchive',
+'order archive',
 OrderID,
 ProductID,
 CustomerID,

@@ -10,44 +10,44 @@
      3. DELETE - Removing Data from Tables
 =================================================================================
 */
-use mydatabase
+use mydatabase;
 /* ============================================================================== 
    INSERT
 =============================================================================== */
 /* #1 Method: Manual INSERT using VALUES */
 -- Insert new records into the customers table
-insert into customers(id,first_name,country,score)
-VALUES (6,'nitya','india',540),
-       (7,'zuker','usa',800)
+INSERT INTO customers (id,first_name,country,score)
+VALUES(6,'megha','india',800) ,
+      (7,'nitya','uk',780)
 
 -- Incorrect column order 
-insert into customers(id,first_name,country,score)
-VALUES ('zara',8,'uk',700)
+INSERT INTO customers (country,id,first_name,score)
+VALUES(8,'megha','india',800) ;
     
 -- Incorrect data type in values
-insert into customers(id,first_name,country,score)
-VALUES ('zara',8,'uk',700)
+INSERT INTO customers (id,first_name,country,score)
+VALUES('megha',8,'india',800) ;
 
 -- Insert a new record with full column values
-insert into customers(id,first_name,country,score)
-VALUES (8,'zara','uk',700)
+INSERT INTO customers (id,first_name,country,score)
+VALUES(8,'praveen','india',700) ;
 
 -- Insert a new record without specifying column names (not recommended)
 INSERT INTO customers 
-VALUES(9,'manoj','india',670) ;
+VALUES(9,'kavana','india',700) ;
     
 -- Insert a record with only id and first_name (other columns will be NULL or default values)
-INSERT INTO customers (id,first_name)
-VALUES(10,'zabi') ;
+INSERT INTO customers (id,first_name)  
+VALUES(10,'sara') ;
 
 /* #2 Method: INSERT DATA USING SELECT - Moving Data From One Table to Another */
 -- Copy data from the 'customers' table into 'persons'
-INSERT INTO persons(id,person_name,birth_date,phone) 
+INSERT INTO persons (id,persons_name,birth_date,phone)
 SELECT 
-   id,
-   first_name,
-   null,
-   'Unknown'
+ id,
+ first_name,
+ NUll,
+ 'unknown'
 FROM customers ;
 
 /* ============================================================================== 
@@ -60,9 +60,9 @@ SET score = 0
 WHERE id=6 ;
 
 -- Change the score of customer with ID 10 to 0 and update the country to 'UK'
-update customers
-SET score=750
-WHERE id=3
+UPDATE customers 
+SET score = 0,country='Uk'
+WHERE id=10 ;
 
 -- Update all customers with a NULL score by setting their score to 0
 UPDATE customers 
@@ -91,4 +91,4 @@ DELETE FROM persons
 
 
 -- Faster method to delete all rows, especially useful for large tables
-TRUNCATE TABLE PERSONS
+TRUNCATE TABLE persons

@@ -19,14 +19,16 @@
         - SUBSTRING
 =================================================================================
 */
-
+use mydatabase;
 /* ============================================================================== 
    CONCAT() - String Concatenation
 =============================================================================== */
-use mydatabase
+
 -- Concatenate first name and country into one column
 SELECT 
-CONCAT(first_name ,'-',country) as full_info
+first_name,
+country,
+CONCAT(first_name,'-',country) as fullInfo
 FROM customers ;
 
 /* ============================================================================== 
@@ -35,12 +37,12 @@ FROM customers ;
 
 -- Convert the first name to lowercase
 SELECT 
-LOWER(first_name) as lowerFirstName
+LOWER(first_name) as lower
 FROM customers ;
 
 -- Convert the first name to uppercase
 SELECT 
-UPPER(first_name) as UpperFirstName
+UPPER(first_name) as upper
 FROM customers ;
 	
 /* ============================================================================== 
@@ -48,26 +50,23 @@ FROM customers ;
 =============================================================================== */
 
 -- Find customers whose first name contains leading or trailing spaces
-SELECT 
-first_name,
-TRIM(first_name) as TrimmedFirstName,
-LEN(first_name) as lengthOfFirstName,
-LEN(TRIM(first_name)) as LenghtOFTrimmedFirstname,
-LEN(first_name)-LEN(TRIM(first_name)) as Flag
-FROM customers 
-WHERE LEN(first_name)-LEN(TRIM(first_name))>0
+select 
+TRIM(first_name) as firstName
+FROM customers
+WHERE first_name!=TRIM(first_name)
+
 
 
 /* ============================================================================== 
    REPLACE() - Replace or Remove old value with new one
 =============================================================================== */
 -- Remove dashes (-) from a phone number
-SELECT '77-95-27-47-67' as orginalPhoneNumber,
-REPLACE('77-95-27-47-67','-','/') as cleanPhoneNumber
+select '77-95-27-47-67' as originalPhone,
+REPLACE('77-95-27-47-67','-','/') as phone
 
 -- Replace File Extence from txt to csv
-SELECT 'report.txt'  as file_text,
-REPLACE('report.txt','.txt','.csv') as csv_text
+select 'report.txt' as originalPhone,
+REPLACE('report.txt','.txt','.csv') as phone
 	
 /* ============================================================================== 
    LEN() - String Length & Trimming
@@ -76,8 +75,7 @@ REPLACE('report.txt','.txt','.csv') as csv_text
 -- Calculate the length of each customer's first name
 SELECT 
 first_name,
-LEN(first_name) as lenghtOfFirstName,
-LEN(TRIM(first_name)) as LenghtOFTrimmedFirstname
+LEN(first_name) as lenght
 FROM customers ;
 	
 /* ============================================================================== 
@@ -86,14 +84,14 @@ FROM customers ;
 
 -- Retrieve the first two characters of each first name
 SELECT 
-first_name,
-left(TRIM(first_name),2) as firstTwoChar
-FROM customers ;
+    first_name,
+    LEFT(TRIM(first_name), 2) AS first_2_chars
+FROM customers
 
 -- Retrieve the last two characters of each first name
 SELECT 
 first_name,
-RIGHT(TRIM(first_name),2) as RighttwoChar
+RIGHT(first_name,2) as last_2_char
 FROM customers ;
 	
 /* ============================================================================== 
@@ -103,7 +101,7 @@ FROM customers ;
 -- Retrieve a list of customers' first names after removing the first character
 SELECT 
 first_name,
-SUBSTRING(TRIM(first_name), 2, LEN(first_name)) as TrimmedFirstName
+SUBSTRING(TRIM(first_name), 2, len(first_name)) as substring
 FROM customers ;
 
 /* ==============================================================================
@@ -112,6 +110,5 @@ FROM customers ;
 
 -- Nesting
 SELECT 
-first_name,
-UPPER(LOWER(TRIM(first_name)))as uppertrimFirstName
+LOWER(UPPER(TRIM(first_name))) as lower
 FROM customers ;

@@ -19,7 +19,7 @@
      3. Multiple Table Joins (4 Tables)
 =================================================================================
 */
-use mydatabase
+use mydatabase;
 /* ============================================================================== 
    BASIC JOINS 
 =============================================================================== */
@@ -39,7 +39,7 @@ c.id,
 c.first_name,
 o.order_id,
 o.sales
-FROM customers AS c INNER JOIN orders as o ON c.id=o.customer_id
+FROM customers as c INNER JOIN orders as o ON c.id=o.customer_id
 
 -- LEFT JOIN
 /* Get all customers along with their orders, 
@@ -49,7 +49,7 @@ c.id,
 c.first_name,
 o.order_id,
 o.sales
-FROM customers AS c LEFT JOIN orders as o on c.id=o.customer_id
+FROM customers as c LEFT JOIN orders as o ON c.id=o.customer_id
 
 -- RIGHT JOIN
 /* Get all customers along with their orders, 
@@ -59,7 +59,7 @@ c.id,
 c.first_name,
 o.order_id,
 o.sales
-FROM customers  as c RIGHT JOIN orders as o on c.id=o.customer_id
+FROM customers as c RIGHT JOIN orders as o ON c.id=o.customer_id
 
 -- Alternative to RIGHT JOIN using LEFT JOIN
 /* Get all customers along with their orders, 
@@ -69,12 +69,16 @@ c.id,
 c.first_name,
 o.order_id,
 o.sales
-FROM orders  as o LEFT JOIN customers as c ON c.id=o.customer_id
+FROM orders as o LEFT JOIN customers as c ON c.id=o.customer_id
 
 -- FULL JOIN
 /* Get all customers and all orders, even if there’s no match */
-SELECT * 
-FROM customers as c FULL JOIN orders as o on c.id=o.customer_id
+SELECT 
+c.id,
+c.first_name,
+o.order_id,
+o.sales
+FROM customers as c FULL JOIN orders as o ON c.id =o.customer_id
 
 /* ============================================================================== 
    ADVANCED JOINS
@@ -87,7 +91,7 @@ c.id,
 c.first_name,
 o.order_id,
 o.sales
-FROM customers  as c LEFT JOIN orders as o on c.id=o.customer_id
+FROM customers as c LEFT JOIN orders as o ON c.id=o.customer_id
 WHERE o.customer_id IS NULL
 
 -- RIGHT ANTI JOIN
@@ -106,8 +110,8 @@ SELECT
 c.id,
 c.first_name,
 o.order_id,
-o.sales 
-FROM orders  as o LEFT JOIN customers as c on c.id=o.customer_id
+o.sales
+FROM orders as o LEFT JOIN customers as c on c.id=o.customer_id
 WHERE c.id IS NULL
 
 -- Alternative to INNER JOIN using LEFT JOIN
@@ -118,8 +122,8 @@ c.id,
 c.first_name,
 o.order_id,
 o.sales
-FROM customers as c LEFT JOIN orders as o on c.id=o.customer_id
-WHERE o.customer_id is NOT NULL AND c.id IS NOT NULL
+FROM customers as c left JOIN orders as o on c.id=o.customer_id
+WHERE c.id IS NOt null and o.customer_id is not NULL
 
 -- FULL ANTI JOIN
 /* Find customers without orders and orders without customers */
@@ -129,12 +133,12 @@ c.first_name,
 o.order_id,
 o.sales
 FROM customers as c FULL JOIN orders as o on c.id=o.customer_id
-WHERE o.customer_id is NULL or c.id is NULL
+WHERE c.id is NULL or o.customer_id is NULL
 
 -- CROSS JOIN
 /* Generate all possible combinations of customers and orders */
 SELECT * 
-FROM customers as c cross JOIN orders 
+FROM customers as c  CROSS JOIN orders 
 
 /* ============================================================================== 
    MULTIPLE TABLE JOINS (4 Tables)
@@ -148,18 +152,18 @@ FROM customers as c cross JOIN orders
    - Sales amount
    - Product price
    - Salesperson's name */
-use SalesDB ;
+use SalesDB
 SELECT 
-o.OrderID as Order_ID,
-c.FirstName as Customers_name,
-p.Product as Product_name,
-o.Sales as Sales_amount,
-p.Price as Product_price,
-e.FirstName as Salespersons_name 
-FROM Sales.Orders as o 
-LEFT JOIN Sales.Customers as c 
+o.OrderID as OrderId,
+c.FirstName as customerName,
+p.Product as productName,
+o.Sales as Sales,
+p.Price as productPrice,
+e.FirstName as SalesPersons_name
+FROM Sales.Orders  as o
+LEFT JOIn Sales.Customers as c 
 on o.CustomerID=c.CustomerID
-LEFT JOIN Sales.Products AS p 
+left JOIN Sales.Products as p
 on o.ProductID=p.ProductID
 LEFT JOIN Sales.Employees as e 
 on o.SalesPersonID=e.EmployeeID

@@ -17,7 +17,7 @@
         - LIKE
 =================================================================================
 */
-USE MYDATABASE
+use mydatabase;
 /* ============================================================================== 
    COMPARISON OPERATORS
 =============================================================================== */
@@ -30,7 +30,7 @@ WHERE country='Germany'
 -- Retrieve all customers who are not from Germany.
 SELECT * 
 FROM customers 
-WHERE country<> 'Germany'
+WHERE country <> 'Germany'
 
 -- Retrieve all customers with a score greater than 500.
 SELECT * 
@@ -70,7 +70,7 @@ WHERE country='USA' OR score>500
 -- Retrieve all customers with a score not less than 500.
 SELECT * 
 FROM customers 
-WHERE NOT score<500
+WHERE Not score<500
 
 /* ============================================================================== 
    RANGE FILTERING - BETWEEN
@@ -84,7 +84,7 @@ WHERE score BETWEEN 100 and 500
 -- Alternative method (Equivalent to BETWEEN)
 SELECT * 
 FROM customers 
-WHERE score>=100 and score<=500
+WHERE score>=100 AND score<=500
 
 /* ============================================================================== 
    SET FILTERING - IN
@@ -93,28 +93,28 @@ WHERE score>=100 and score<=500
 -- Retrieve all customers from either Germany or the USA.
 SELECT * 
 FROM customers 
-WHERE country IN ('USA','Germany')
+WHERE country IN ('usa','Germany')
 
 /* ============================================================================== 
    PATTERN MATCHING - LIKE
 =============================================================================== */
 
 -- Find all customers whose first name starts with 'M'.
-SELECT *
+SELECT * 
 FROM customers 
-WHERE first_name LIKE 'm%'
+WHERE first_name LIKE ('m%')
 
 -- Find all customers whose first name ends with 'n'.
 SELECT * 
 FROM customers 
-WHERE first_name LIKE '%n'
+WHERE first_name LIKE ('%n')
 
 -- Find all customers whose first name contains 'r'.
 SELECT * 
 FROM customers 
-WHERE first_name LIKE '%r%'
+WHERE first_name LIKE ('%r%')
 
 -- Find all customers whose first name has 'r' in the third position.
 SELECT * 
 FROM customers 
-WHERE first_name LIKE '__r%'
+WHERE first_name LIKE ('__r%')
